@@ -1,0 +1,66 @@
+### MindHealer QLoRA 配置文件
+### 基于 google/gemma-4-E4B-it 微调心理咨询能力
+
+### 模型
+model_name_or_path: google/gemma-4-E4B-it
+model_revision: master
+quantization_bit: 4
+
+### 模板（ Gemma 用 gemma 模板）
+template: gemma
+
+### 数据
+dataset: psych_counseling
+dataset_dir: ../data/processed
+
+### 输出
+output_dir: ../outputs/gemma4-qlora-psych
+logging_dir: ../outputs/gemma4-qlora-psych/logs
+
+### 训练参数
+stage: sft
+do_train: true
+finetuning_type: lora
+
+### LoRA 参数（QLoRA 核心）
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target: q_proj,v_proj
+
+### 量化参数（4bit NF4）
+bnb_4bit_compute_dtype: bfloat16
+bnb_4bit_quant_type: nf4
+bnb_4bit_use_double_quant: true
+
+### Batch size & 速度
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+per_device_eval_batch_size: 1
+eval_accumulation_steps: 8
+
+### 学习率
+learning_rate: 1.0e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+
+### 精度
+bf16: true
+fp16: false
+tf32: true
+
+### Gradient Checkpoint（省显存）
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+
+### 日志 & 保存
+logging_steps: 10
+save_steps: 500
+eval_steps: 500
+save_total_limit: 3
+
+### DeepSpeed（单卡可以不用，多卡必须）
+### 如果是单卡 24GB，把下面这行注释掉
+### deepspeed: examples/deepspeed/ds_zereo2.json

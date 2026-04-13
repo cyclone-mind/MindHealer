@@ -1,0 +1,36 @@
+# 训练输出
+outputs/
+*.pt
+*.pth
+
+# 模型
+models/
+*.safetensors
+*.bin
+*.gguf
+
+# 数据
+data/raw/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# LLaMA-Factory
+LLaMA-Factory/
+
+# 日志
+*.log
+
+# Mac
+.DS_Store

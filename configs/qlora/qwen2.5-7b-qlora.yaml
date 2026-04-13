@@ -1,0 +1,66 @@
+### MindHealer QLoRA 配置文件
+### 基于 Qwen2.5-7B-Instruct 微调心理咨询能力
+### 备用基座：如果你折腾 Gemma 折腾太久，可以直接用这个
+
+### 模型
+model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+model_revision: master
+quantization_bit: 4
+
+### 模板（ Qwen 用 qwen 模板，对话能力很强）
+template: qwen
+
+### 数据
+dataset: psych_counseling
+dataset_dir: ../data/processed
+
+### 输出
+output_dir: ../outputs/qwen2.5-7b-qlora-psych
+logging_dir: ../outputs/qwen2.5-7b-qlora-psych/logs
+
+### 训练参数
+stage: sft
+do_train: true
+finetuning_type: lora
+
+### LoRA 参数
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target: q_proj,v_proj,k_proj,o_proj
+
+### 量化参数（4bit NF4）
+bnb_4bit_compute_dtype: bfloat16
+bnb_4bit_quant_type: nf4
+bnb_4bit_use_double_quant: true
+
+### Batch size & 速度
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+per_device_eval_batch_size: 1
+eval_accumulation_steps: 4
+
+### 学习率
+learning_rate: 1.0e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+
+### 精度
+bf16: true
+fp16: false
+tf32: true
+
+### Gradient Checkpoint（省显存）
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+
+### 日志 & 保存
+logging_steps: 10
+save_steps: 500
+eval_steps: 500
+save_total_limit: 3
+
+### DeepSpeed（单卡 24GB 可以不用，多卡必须）
+### deepspeed: examples/deepspeed/ds_zereo2.json

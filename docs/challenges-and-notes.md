@@ -51,4 +51,53 @@ git clone https://modelscope.cn/datasets/YIRONGCHEN/PsyDTCorpus.git
 
 ---
 
+## 2026-04-13（补充）
+
+### vLLM 部署 Gemma 的坑
+
+Gemma 在 vLLM 上运行有一些特殊问题：
+
+1. **tokenizer 问题**：Gemma 的 tokenizer 和标准 Llama 不完全兼容，启动时必须加 `--trust-remote-code`
+
+2. **生成质量差异**：有时候 vLLM 生成的回复和 transformers 原生输出风格略有差异，不影响功能但可能影响用户体验
+
+3. **chat template**：Gemma 的 chat template 格式和 Llama 不同，一定要用 `apply_chat_template` 而不是自己拼接
+
+### Qwen2.5-7B 相对于 Gemma 的优势
+
+如果你在 Gemma 上卡了很久，可以考虑换 Qwen2.5-7B：
+
+| 特性 | Gemma-4B | Qwen2.5-7B |
+|------|-----------|------------|
+| 社区支持 | 一般 | 很好 |
+| vLLM 兼容性 | 一般 | 完美 |
+| 中文能力 | 一般 | 很强 |
+| 对话模板 | 特殊 | 标准 |
+| 训练稳定性 | 偶发问题 | 很稳定 |
+
+Qwen 对中文心理咨询场景的适配反而可能更好。
+
+### 心理咨询数据的特点
+
+心理咨询对话和普通对话有几个显著区别：
+
+1. **长回复**：咨询师回复通常很长，需要 `max_tokens` 设置大一些（512-1024）
+2. **专业术语**：需要正确使用心理学概念，不能胡编
+3. **共情优先**：好的回复要先共情，再给建议
+4. **匿名性**：不能暴露来访者隐私
+
+这些特点会影响训练和推理的参数设置。
+
+### Gradio 的问题
+
+`inference/web_demo.py` 里的 Gradio 界面有几个已知问题：
+
+1. 第一次响应会比较慢（模型加载）
+2. 不支持多用户并发
+3. 没有流式输出
+
+生产环境不要用 Gradio 作为 API 暴露。
+
+---
+
 （待补充）

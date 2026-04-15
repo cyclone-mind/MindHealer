@@ -16,7 +16,7 @@
         "overlap_comm": true,
         "reduce_scatter": true,
         "reduce_bucket_size": 5e8,
-        "round_poin": 3
+        "round_p": 3
     },
     "gradient_accumulation_steps": "auto",
     "gradient_clipping": "auto",

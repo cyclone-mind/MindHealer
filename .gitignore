@@ -29,6 +29,9 @@ env/
 # LLaMA-Factory
 LLaMA-Factory/
 
+# llama.cpp（export-to-ollama.py 会克隆）
+llama.cpp/
+
 # 日志
 *.log
 

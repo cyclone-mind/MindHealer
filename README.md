@@ -148,9 +148,17 @@ MindHealer/
 
 ### 全量微调（需要 8× A100 80GB）
 
+全量微调需要修改配置文件中的 `finetuning_type`，然后用 LLaMA-Factory 启动：
+
 ```bash
-bash scripts/05-train-full.sh
+# 1. 修改配置：把 finetuning_type: lora 改成 finetuning_type: full
+# 2. 注释掉 quantization_bit 和 bnb 相关参数（全量微调不支持 QLoRA 量化）
+# 3. 启动训练
+cd LLaMA-Factory
+llamafactory-cli train configs/qlora/gemma4-qlora.yaml
 ```
+
+> 注意：全量微调至少需要 8× A100 80GB，QLoRA 在单卡 24GB 上可正常运行。
 
 ### 多卡 QLoRA
 

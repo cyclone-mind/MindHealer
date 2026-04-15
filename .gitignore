@@ -1,39 +1,56 @@
-# 训练输出
-outputs/
+# 模型和权重
+*.bin
+*.safetensors
+*.gguf
 *.pt
 *.pth
+outputs/
+!outputs/.gitkeep
 
-# 模型
-models/
-*.safetensors
-*.bin
-*.gguf
-
-# 数据
+# 数据（原始和处理后）
 data/raw/
 data/processed/
 
+# LLaMA-Factory 外部依赖
+LLaMA-Factory/
+llama.cpp/
+
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# 虚拟环境
 venv/
 env/
 .venv/
+
+# 环境变量
+.env
+.env.local
 
 # IDE
 .vscode/
 .idea/
 *.swp
+*.swo
+*~
 
-# LLaMA-Factory
-LLaMA-Factory/
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
 
-# llama.cpp（export-to-ollama.py 会克隆）
-llama.cpp/
-
-# 日志
+# OS
+.DS_Store
+Thumbs.db
 *.log
 
-# Mac
+# HuggingFace cache（可选）
+# ~/.cache/huggingface/
+
+# MacOS
 .DS_Store

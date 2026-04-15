@@ -24,6 +24,8 @@ do_train: true
 finetuning_type: lora
 
 ### LoRA 参数
+### 注意：Qwen 比 Gemma 多了 k_proj,o_proj，因为 Qwen 的注意力层更大
+### 全量 target 可选 all（所有线性层），这里只微调关键的 qkv 投影
 lora_rank: 8
 lora_alpha: 16
 lora_dropout: 0.05

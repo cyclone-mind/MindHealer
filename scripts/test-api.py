@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 MindHealer API 测试脚本
 测试部署的 vLLM/Ollama API 服务是否正常工作
+
+用法:
+  python scripts/test-api.py                        # 使用默认配置测试 vLLM
+  python scripts/test-api.py --type ollama          # 测试 Ollama
+  python scripts/test-api.py -u http://localhost:8000 -k my-key -m my-model
 """
 
 import sys

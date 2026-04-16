@@ -65,4 +65,4 @@ eval_steps: 500
 save_total_limit: 3
 
 ### DeepSpeed（单卡 24GB 可以不用，多卡必须）
-### deepspeed: examples/deepspeed/ds_zereo2.json
+### deepspeed: ../configs/deepspeed/ds_zereo2.json

@@ -59,7 +59,7 @@
 
 2. 启动训练时指定模板：
    ```bash
-   llamafactory-cli train examples/train_full/qwen.yaml --template gemma
+   llamafactory-cli train configs/qlora/gemma4-qlora.yaml --template gemma
    ```
 
 3. 如果还是不行，换 Qwen 基座（见下文）

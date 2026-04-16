@@ -49,8 +49,21 @@ env/
 Thumbs.db
 *.log
 
-# HuggingFace cache（可选）
-# ~/.cache/huggingface/
+# 模型下载缓存（01-download-data.sh 会用到）
+models/
+
+# pytest / 测试
+.pytest_cache/
+.coverage
+*.cover
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+
+# ModelScope cache 手动下载的模型
+.model_cache/
 
 # MacOS
 .DS_Store
